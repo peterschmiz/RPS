@@ -1,0 +1,30 @@
+.debug-container {
+	min-height: 300px;
+	padding: 0 30px;
+	margin: 0;
+	font-size: 72px;
+	text-transform: uppercase;
+	text-align: center;
+	color: #FFF;
+	opacity: 1;
+	box-sizing: border-box;
+	@include transition (opacity .3s ease-in-out);
+
+	&.vertical-centering {
+		display: -webkit-flex;
+		-webkit-align-items: center;
+		-webkit-justify-content: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&.fade {
+		opacity: 0;
+	}
+}
+
+.hand-deg {
+	position: relative;
+}
+
