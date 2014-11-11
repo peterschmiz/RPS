@@ -1,0 +1,3 @@
+**/*.nohint.*
+source/js/module/app.rps.js
+source/js/module/app.hand-detect.js

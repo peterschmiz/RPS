@@ -12,6 +12,7 @@ APP.RPS = (function () {
 		var $compContainerContent = $('.player-container.computer .debug-container');
 		var $playerScore = $('.player-score');
 		var $compScore = $('.comp-score');
+		var status = false;
 
 		leapController.connect();
 
@@ -25,26 +26,13 @@ APP.RPS = (function () {
 				console.log('incoming gesture');
 				if(leapController.frame().hands.length) {
 					$playerContainerTitle.text('Player ready');
-					if(leapController.frame().hands && isHandClosed(hand)) {
-						console.log('ROCK');
-						playerGuess = 'ROCK';
-						compGuess = computerGuess();
-						$playerContainerContent.text(playerGuess);
-						$compContainerContent.text(compGuess);
-						if(areYouWinner(playerGuess, compGuess) == 1) {
-							$playerScore.text(parseInt($playerScore.text())+1);
-						} else if(areYouWinner(playerGuess, compGuess) == -1) {
-							$compScore.text(parseInt($compScore.text())+1);
-						}
-					} else {
-						var extendedFingers = 0;
-						for(var f = 0, length = hand.fingers.length; f < length; f++){
-							var finger = hand.fingers[f];
-							if(finger.extended) extendedFingers++;
-						}
-						if(extendedFingers > 2) {
-							console.log('PAPER');
-							playerGuess = 'PAPER';
+
+					setTimeout(function() {
+						status = true;
+						$('.overlay').removeClass('active');
+						if(leapController.frame().hands && isHandClosed(hand)) {
+							console.log('ROCK');
+							playerGuess = 'ROCK';
 							compGuess = computerGuess();
 							$playerContainerContent.text(playerGuess);
 							$compContainerContent.text(compGuess);
@@ -54,18 +42,40 @@ APP.RPS = (function () {
 								$compScore.text(parseInt($compScore.text())+1);
 							}
 						} else {
-							console.log('SCISSOR');
-							playerGuess = 'SCISSOR';
-							compGuess = computerGuess();
-							$playerContainerContent.text(playerGuess);
-							$compContainerContent.text(compGuess);
-							if(areYouWinner(playerGuess, compGuess) == 1) {
-								$playerScore.text(parseInt($playerScore.text())+1);
-							} else if(areYouWinner(playerGuess, compGuess) == -1) {
-								$compScore.text(parseInt($compScore.text())+1);
+							var extendedFingers = 0;
+							for(var f = 0, length = hand.fingers.length; f < length; f++){
+								var finger = hand.fingers[f];
+								if(finger.extended) extendedFingers++;
+							}
+							if(extendedFingers > 2) {
+								console.log('PAPER');
+								playerGuess = 'PAPER';
+								compGuess = computerGuess();
+								$playerContainerContent.text(playerGuess);
+								$compContainerContent.text(compGuess);
+								if(areYouWinner(playerGuess, compGuess) == 1) {
+									$playerScore.text(parseInt($playerScore.text())+1);
+								} else if(areYouWinner(playerGuess, compGuess) == -1) {
+									$compScore.text(parseInt($compScore.text())+1);
+								}
+							} else {
+								console.log('SCISSOR');
+								playerGuess = 'SCISSOR';
+								compGuess = computerGuess();
+								$playerContainerContent.text(playerGuess);
+								$compContainerContent.text(compGuess);
+								if(areYouWinner(playerGuess, compGuess) == 1) {
+									$playerScore.text(parseInt($playerScore.text())+1);
+								} else if(areYouWinner(playerGuess, compGuess) == -1) {
+									$compScore.text(parseInt($compScore.text())+1);
+								}
 							}
 						}
+					}, status ? 0: 3000);
+					if(!status) {
+						$('.overlay').addClass('active');
 					}
+
 				} else {
 					$playerContainerTitle.text('Waiting for player...');
 					$('.debug-container').text('');

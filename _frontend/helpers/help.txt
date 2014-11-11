@@ -1,0 +1,78 @@
+01.
+rubyinstaller-1.9.3-p484.exe
+- download: http://rubyinstaller.org/downloads
+- install to: c:\Ruby193\
+- install sass: gem install sass
+- run: gem install bundler
+
+02.
+pathname.rb.ok (from Petya)
+- copy (& rename) and overwrite: c:\Ruby193\lib\ruby\1.9.1\pathname.rb
+
+03.
+DevKit-tdm-32-4.5.2-20111229-1559-sfx.exe
+- download: http://rubyinstaller.org/downloads
+- install: C:\Ruby193\DevKit\
+- run in DevKit folder: ruby dk.rb init
+- run in DevKit folder: ruby dk.rb review
+- run in DevKit folder: ruby dk.rb install
+
+04.
+node-v0.10.28-x86.msi or node-v0.10.28-x64.msi
+(based on your OS)
+- download: http://nodejs.org/download/
+- install
+
+05.
+Git-1.9.4-preview20140611.exe
+- download: http://git-scm.com/downloads
+- install
+- add to path: ;C:\Program Files (x86)\Git\bin;C:\Program Files (x86)\Git\cmd
+
+06.
+install grunt
+- run: npm install -g grunt-cli
+
+---
+01-06: apply once
+07-: apply for every project
+---
+
+07.
+- copy skeleton to a project folder
+- delete ".git" folder
+
+08. (from Petya, if the downloaded isn't correct)
+- copy to "_frontend" folder: package.json
+- copy to "_frontend" folder: Gemfile
+- delete Gemfile.lock (if there is any)
+
+09.
+setup/edit package.json file
+- rewrite project name (project root folder name)
+
+10.
+- in "_frontend" folder run: init.bat OR (manually)
+- in "_frontend" folder run: npm install
+- in "_frontend" folder run: bundle install --path .bundle/gems
+
+11.
+test the skeleton:
+- run: grunt project-info
+
+12. (for check if everything is ok)
+run middleman:
+- run: grunt middleman:1 (middleman started until ctrl+c, check http://localhost:4567)
+
+13.
+set SVN ignore:
+- ignore "node_modules" folder
+- ignore ".bundle" folder
+- ignore "*.lock" files (eg. Gemfile.lock)
+
+14.
+- run in "_frontend" folder: start.bat
+- run in "_frontend" folder: start-prod.bat (if you don't want to build static files)
+
+15.
+- work and learn
